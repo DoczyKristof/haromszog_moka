@@ -82,4 +82,13 @@ public class DHaromszog {
     public double Terulet(){
         return this.aOldal * this.bOldal / 2;
     }
+    //toString
+    @Override
+    public String toString() {
+        return String.format("%d. sor: a = %f b = %f c = %f",
+                this.sorSzam,
+                this.aOldal,
+                this.bOldal,
+                this.cOldal);
+    }
 }
