@@ -30,7 +30,8 @@ public class Felulet extends JFrame{
     private void loadStuff(ActionEvent ae){
         this.filechsr = new JFileChooser();
         if (this.filechsr.showDialog(this, "Fájl megnyitása") != -1) {
-            System.out.println(filechsr.getSelectedFile().toString());
+             String fileName = filechsr.getSelectedFile().toString();
+             readFile(fileName);
         }
     }
     private void initComp(){
@@ -71,13 +72,17 @@ public class Felulet extends JFrame{
             FileReader fr = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fr);
             String sor = br.readLine();
-            while (sor != null) {   
+            int i = 0;
+            while (sor != null) {
+                i++;
                 try{
-                    DHaromszog dh = new DHaromszog(sor,0);
-                    sor = br.readLine();
+                    DHaromszog dh = new DHaromszog(sor,i);
+                    this.haromszogLista.add(dh);
+                    
                 }catch(Exception e){
-                    System.err.println("");
+                    System.err.println(e.getMessage());
                 }
+                sor = br.readLine();
             }
             br.close();
             fr.close();
