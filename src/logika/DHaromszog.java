@@ -63,4 +63,10 @@ public class DHaromszog {
         }
         return novekvo;
     }
+    public double Kerulet(){
+        return this.aOldal + this.bOldal + this.cOldal;
+    }
+    public double Terulet(){
+        return this.aOldal * this.bOldal / 2;
+    }
 }
