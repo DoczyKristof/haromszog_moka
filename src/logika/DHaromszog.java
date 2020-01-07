@@ -4,9 +4,17 @@ public class DHaromszog {
     private double aOldal;
     private double bOldal;
     private double cOldal;
+    private int sorSzam;
     //konstr
-    public DHaromszog(String sor, int sorszam){
-        
+    public DHaromszog(String sor, int sorszam) throws Exception{
+        this.setSorSzam(sorszam);
+        String[] data = sor.replace(',','.').split(" ");
+        this.setaOldal(Double.parseDouble(data[0]));
+        this.setbOldal(Double.parseDouble(data[1]));
+        this.setcOldal(Double.parseDouble(data[2]));
+        this.EllNovekvoSor();
+        this.EllMegszerk();
+        this.EllDerek();
     }
     //getterek
     public double getaOldal() {
@@ -18,12 +26,14 @@ public class DHaromszog {
     public double getcOldal() {
         return cOldal;
     }
+    public int getSorSzam() {
+        return sorSzam;
+    }
     //setterek
     public void setaOldal(double aOldal) throws Exception{
         if (aOldal > 0) {
             this.aOldal = aOldal;
-        }
-        else{
+        }else{
             throw new Exception("Az A oldal nem lehet 0 vagy negatív!");
         }
     }
@@ -40,6 +50,9 @@ public class DHaromszog {
         }else{
             throw new Exception("A C oldal nem lehet 0 vagy negatív!");
         }
+    }
+    public void setSorSzam(int sorSzam) {
+        this.sorSzam = sorSzam;
     }
     //misc
     private boolean EllDerek() throws Exception{
