@@ -1,5 +1,6 @@
 package felulet;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,10 +9,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import logika.DHaromszog;
 public class Felulet extends JFrame{
@@ -21,6 +25,8 @@ public class Felulet extends JFrame{
     private Container ablak;
     private JFileChooser filechsr;
     private List<DHaromszog> haromszogLista;
+    private DefaultListModel dlm_hibaBigyo;
+    private JList lst_hiba;
     //kons
     public Felulet(){
         super();
@@ -62,6 +68,15 @@ public class Felulet extends JFrame{
         this.pnl_hibak.setBorder(new TitledBorder("Hibák a kiválasztott állományban"));
         this.pnl_hibak.setLayout(null);
         this.ablak.add(this.pnl_hibak);
+            //meanwhile lista toltes helo
+                this.dlm_hibaBigyo = new DefaultListModel();
+                this.lst_hiba = new JList();
+                JScrollPane banatxd = new JScrollPane(this.lst_hiba);
+                banatxd.setPreferredSize(new Dimension(600, 100));
+                this.lst_hiba.setSize(600, 100);
+                this.lst_hiba.setLocation(20, 20);
+                this.pnl_hibak.add(this.lst_hiba);
+            //end of it
         //end of hibakpanel
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -78,8 +93,8 @@ public class Felulet extends JFrame{
                 try{
                     DHaromszog dh = new DHaromszog(sor,i);
                     this.haromszogLista.add(dh);
-                    
                 }catch(Exception e){
+                    this.dlm_hibaBigyo.addElement(e.getMessage());
                     System.err.println(e.getMessage());
                 }
                 sor = br.readLine();
